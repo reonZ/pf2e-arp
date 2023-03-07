@@ -1,4 +1,4 @@
-# FoundryVTT PF2e Better Abp
+# FoundryVTT PF2e Automatic Rune Progression
 
 This module is made to replace the `Automatic Bonus Progression` variant rule, instead it will automatically give the `potency`, `striking` and `resilient` runes on character's equipment when appropriate.
 
