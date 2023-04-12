@@ -39,10 +39,8 @@ async function onPrapareWeaponData(this: WeaponPF2e, wrapped: libWrapper.Wrapped
 
     const level = actor.level
 
-    if (this._source.system.temporary) {
-        const traits = this._source.system.traits.value
-        if (traits.includes('alchemical') && traits.includes('bomb')) return wrapped()
-    }
+    const traits = this._source.system.traits.value
+    if (traits.includes('alchemical') && traits.includes('bomb')) return wrapped()
 
     this.system.potencyRune.value = level < 2 ? null : level < 10 ? 1 : level < 16 ? 2 : 3
     this.system.strikingRune.value = level < 4 ? null : level < 12 ? 'striking' : level < 19 ? 'greaterStriking' : 'majorStriking'
