@@ -1,3 +1,7 @@
+# 1.1.2
+
+-   fixed wrappings being too late for the first character `prepareBaseData` on the client to be handled by the module
+
 # 1.1.1
 
 -   fixed issue with non-temporary bombs
