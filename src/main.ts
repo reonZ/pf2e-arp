@@ -7,10 +7,12 @@ setModuleID(MODULE_ID)
 
 Hooks.once('libWrapper.Ready', () => {})
 
-Hooks.once('ready', () => {
-    registerWrapper('CONFIG.PF2E.Item.documentClasses.weapon.prototype.prepareBaseData', onPrapareWeaponData)
-    registerWrapper('CONFIG.PF2E.Item.documentClasses.armor.prototype.prepareBaseData', onPrepareArmorData)
+Hooks.once('setup', () => {
+    registerWrapper('CONFIG.PF2E.Item.documentClasses.weapon.prototype.prepareBaseData', onPrapareWeaponData, 'WRAPPER')
+    registerWrapper('CONFIG.PF2E.Item.documentClasses.armor.prototype.prepareBaseData', onPrepareArmorData, 'WRAPPER')
+})
 
+Hooks.once('ready', () => {
     if (!game.user.isGM) return
     if (game.settings.get('pf2e', 'automaticBonusVariant') !== 'noABP') {
         game.settings.set('pf2e', 'automaticBonusVariant', 'noABP')
@@ -18,7 +20,7 @@ Hooks.once('ready', () => {
     }
 })
 
-async function onPrepareArmorData(this: ArmorPF2e, wrapped: libWrapper.WrappedFunction) {
+async function onPrepareArmorData(this: ArmorPF2e, wrapped: () => void) {
     if (this.isShield) return wrapped()
 
     const actor = this.actor
@@ -33,7 +35,7 @@ async function onPrepareArmorData(this: ArmorPF2e, wrapped: libWrapper.WrappedFu
     wrapped()
 }
 
-async function onPrapareWeaponData(this: WeaponPF2e, wrapped: libWrapper.WrappedFunction) {
+async function onPrapareWeaponData(this: WeaponPF2e, wrapped: () => void) {
     const actor = this.actor
     if (!actor || !actor.isOfType('character')) return wrapped()
 
