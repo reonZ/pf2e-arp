@@ -1,3 +1,7 @@
+# 1.2.0
+
+-   compatible with v11
+
 # 1.1.2
 
 -   fixed wrappings being too late for the first character `prepareBaseData` on the client to be handled by the module
