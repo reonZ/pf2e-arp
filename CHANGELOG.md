@@ -1,6 +1,6 @@
 # 1.3.0
 
--   potency, striking and resilient runes will not be counted in the updated pricing of the weapon anymore (unlike the rest of the module which only applies to characters, this feature is global)
+-   potency and striking runes will not be counted in the updated pricing of the weapon anymore (unlike the rest of the module which only applies to characters, this feature is global)
 
 # 1.2.0
 
