@@ -9,6 +9,7 @@ Hooks.once('libWrapper.Ready', () => {})
 
 Hooks.once('setup', () => {
     registerWrapper('CONFIG.PF2E.Item.documentClasses.weapon.prototype.prepareBaseData', onPrapareWeaponData, 'WRAPPER')
+    registerWrapper('CONFIG.PF2E.Item.documentClasses.weapon.prototype.getRunesValuationData', onGetRunesValuationData, 'MIXED')
     registerWrapper('CONFIG.PF2E.Item.documentClasses.armor.prototype.prepareBaseData', onPrepareArmorData, 'WRAPPER')
 })
 
@@ -20,7 +21,7 @@ Hooks.once('ready', () => {
     }
 })
 
-async function onPrepareArmorData(this: ArmorPF2e, wrapped: () => void) {
+function onPrepareArmorData(this: ArmorPF2e, wrapped: () => void) {
     if (this.isShield) return wrapped()
 
     const actor = this.actor
@@ -35,7 +36,7 @@ async function onPrepareArmorData(this: ArmorPF2e, wrapped: () => void) {
     wrapped()
 }
 
-async function onPrapareWeaponData(this: WeaponPF2e, wrapped: () => void) {
+function onPrapareWeaponData(this: WeaponPF2e, wrapped: () => void) {
     const actor = this.actor
     if (!actor || !actor.isOfType('character')) return wrapped()
 
@@ -48,4 +49,12 @@ async function onPrapareWeaponData(this: WeaponPF2e, wrapped: () => void) {
     this.system.strikingRune.value = level < 4 ? null : level < 12 ? 'striking' : level < 19 ? 'greaterStriking' : 'majorStriking'
 
     wrapped()
+}
+
+function onGetRunesValuationData(this: WeaponPF2e, wrapped: () => void) {
+    const actor = this.actor
+    if (!actor || !actor.isOfType('character')) return wrapped()
+
+    const propertyRuneData = CONFIG.PF2E.runes.weapon.property
+    return this.system.runes.property.map(p => propertyRuneData[p])
 }
