@@ -7,9 +7,13 @@ setModuleID(MODULE_ID)
 
 Hooks.once('libWrapper.Ready', () => {})
 
-Hooks.once('setup', () => {
+Hooks.once('init', () => {
     registerWrapper('CONFIG.PF2E.Item.documentClasses.weapon.prototype.prepareBaseData', onPrapareWeaponData, 'WRAPPER')
-    registerWrapper('CONFIG.PF2E.Item.documentClasses.weapon.prototype.getRunesValuationData', onGetRunesValuationData, 'MIXED')
+    registerWrapper(
+        'CONFIG.PF2E.Item.documentClasses.weapon.prototype.getRunesValuationData',
+        onGetRunesValuationData,
+        'OVERRIDE'
+    )
     registerWrapper('CONFIG.PF2E.Item.documentClasses.armor.prototype.prepareBaseData', onPrepareArmorData, 'WRAPPER')
 })
 
@@ -51,10 +55,7 @@ function onPrapareWeaponData(this: WeaponPF2e, wrapped: () => void) {
     wrapped()
 }
 
-function onGetRunesValuationData(this: WeaponPF2e, wrapped: () => void) {
-    const actor = this.actor
-    if (!actor || !actor.isOfType('character')) return wrapped()
-
+function onGetRunesValuationData(this: WeaponPF2e) {
     const propertyRuneData = CONFIG.PF2E.runes.weapon.property
     return this.system.runes.property.map(p => propertyRuneData[p])
 }
