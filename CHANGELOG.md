@@ -1,3 +1,7 @@
+# 1.5.2
+
+-   price manipulation is now global instead of only affecting characters
+
 # 1.5.1
 
 -   fixed error when the module tries to disable the system's variant `ABP` setting
