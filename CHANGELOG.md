@@ -1,6 +1,6 @@
 # 1.5.1
 
--   fixed error when the module tries to disable the system's metagame `ABP` setting
+-   fixed error when the module tries to disable the system's variant `ABP` setting
 
 # 1.5.0
 
