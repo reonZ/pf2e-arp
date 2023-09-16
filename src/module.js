@@ -1,5 +1,12 @@
 export const MODULE_ID = 'pf2e-arp'
 
+function localize(...args) {
+    let [key, data] = args
+    key = `${MODULE_ID}.${key}`
+    if (data) return game.i18n.format(key, data)
+    return game.i18n.localize(key)
+}
+
 function notify(str, arg1, arg2, arg3) {
     const type = typeof arg1 === 'string' ? arg1 : 'info'
     const data = typeof arg1 === 'object' ? arg1 : typeof arg2 === 'object' ? arg2 : undefined
