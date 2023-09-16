@@ -1,7 +1,11 @@
+# 1.5.0
+
+-   the module once again prevents the increase of the item value from added runes (armors as well)
+
 # 1.4.0
 
 -   this is a system `5.5.0` release
--   the module no longer prevent the increase of the item value from the added runes (the system made it unaccessible)
+-   the module no longer prevent the increase of the item value from the added runes (the system made it inaccessible)
 
 # 1.3.0
 
