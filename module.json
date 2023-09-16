@@ -13,15 +13,15 @@
         "scripts/main.js"
     ],
     "compatibility": {
-        "minimum": "10.291",
+        "minimum": "11.308",
         "verified": "11"
     },
-    "version": "1.3.0",
+    "version": "1.4.0",
     "manifestPlusVersion": "1.2.0",
     "url": "https://github.com/reonZ/pf2e-arp",
     "readme": "https://github.com/reonZ/pf2e-arp/blob/master/README.md",
     "manifest": "https://raw.githubusercontent.com/reonZ/pf2e-arp/master/module.json",
-    "download": "https://github.com/reonZ/pf2e-arp/releases/download/1.3.0/module.zip",
+    "download": "https://github.com/reonZ/pf2e-arp/releases/download/1.4.0/module.zip",
     "changelog": "https://github.com/reonZ/pf2e-arp/blob/master/CHANGELOG.md",
     "bugs": "https://github.com/reonZ/pf2e-arp/issues",
     "relationships": {
@@ -31,7 +31,7 @@
                 "type": "system",
                 "manifest": "https://raw.githubusercontent.com/foundryvtt/pf2e/master/system.json",
                 "compatibility": {
-                    "minimum": "4.8.3"
+                    "minimum": "5.5.0"
                 }
             }
         ],

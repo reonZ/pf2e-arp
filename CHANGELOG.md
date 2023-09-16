@@ -1,3 +1,8 @@
+# 1.4.0
+
+-   this is a system `5.5.0` release
+-   the module no longer prevent the increase of the item value from the added runes (the system made it unaccessible)
+
 # 1.3.0
 
 -   potency and striking runes will not be counted in the updated pricing of the weapon anymore (unlike the rest of the module which only applies to characters, this feature is global)
