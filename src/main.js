@@ -35,25 +35,33 @@ function onPrepareWeaponData(wrapped) {
     wrapped()
 }
 
+const WEAPON_POTENCY_PRICE = {
+    1: 35,
+    2: 935,
+    3: 8935,
+    4: 8935,
+}
+const WEAPON_STRIKING_PRICE = {
+    striking: 65,
+    greaterStriking: 1065,
+    majorStriking: 31065,
+}
 function onPrepareWeaponDerivedData(wrapped) {
     wrapped()
 
-    const level = this.actor?.level
-    if (this.system.specific?.value || level == null || level < 2) return
-
     const traits = this._source.system.traits.value
-    if (traits.includes('alchemical') && traits.includes('bomb')) return
+    if (!this.actor || (traits.includes('alchemical') && traits.includes('bomb'))) return
 
     let gp = this.price.value.goldValue
-    gp -= level >= 16 ? 8935 : level >= 10 ? 935 : 35
 
-    if (!this.system.runes.property.length) {
+    const potency = this.system.potencyRune.value
+    if (potency) gp -= WEAPON_POTENCY_PRICE[potency]
+
+    const striking = this.system.strikingRune.value
+    if (striking) gp -= WEAPON_STRIKING_PRICE[striking]
+
+    if ((potency || striking) && !this.system.runes.property.length)
         gp += new game.pf2e.Coins(this._source.system.price.value).goldValue
-    }
-
-    if (level >= 4) {
-        gp -= level >= 19 ? 31065 : level >= 12 ? 1065 : 65
-    }
 
     this.system.price.value = new game.pf2e.Coins({ gp })
 }
@@ -73,22 +81,32 @@ function onPrepareArmorData(wrapped) {
     wrapped()
 }
 
+const ARMOR_POTENCY_PRICE = {
+    1: 160,
+    2: 1060,
+    3: 20560,
+    4: 20560,
+}
+const ARMOR_RESILIENCY_PRICE = {
+    resilient: 340,
+    greaterResilient: 3440,
+    majorResilient: 49440,
+}
 function onPrepareArmorDerivedData(wrapped) {
     wrapped()
 
-    const level = this.actor?.level
-    if (this.isShield || this.system.specific?.value || level == null || level < 5) return
+    if (!this.actor || this.isShield) return
 
     let gp = this.price.value.goldValue
-    gp -= level >= 18 ? 20560 : level >= 11 ? 1060 : 160
 
-    if (!this.system.runes.property.length) {
+    const potency = this.system.potencyRune.value
+    if (potency) gp -= ARMOR_POTENCY_PRICE[potency]
+
+    const resiliency = this.system.resiliencyRune.value
+    if (resiliency) gp -= ARMOR_RESILIENCY_PRICE[resiliency]
+
+    if ((potency || resiliency) && !this.system.runes.property.length)
         gp += new game.pf2e.Coins(this._source.system.price.value).goldValue
-    }
-
-    if (level >= 8) {
-        gp -= level >= 20 ? 49440 : level >= 14 ? 3440 : 340
-    }
 
     this.system.price.value = new game.pf2e.Coins({ gp })
 }
