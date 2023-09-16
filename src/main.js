@@ -51,12 +51,10 @@ function onPrepareWeaponDerivedData(wrapped) {
         gp += new game.pf2e.Coins(this._source.system.price.value).goldValue
     }
 
-    if (level < 4) {
-        this.system.price.value = new game.pf2e.Coins({ gp })
-        return
+    if (level >= 4) {
+        gp -= level >= 19 ? 31065 : level >= 12 ? 1065 : 65
     }
 
-    gp -= level >= 19 ? 31065 : level >= 12 ? 1065 : 65
     this.system.price.value = new game.pf2e.Coins({ gp })
 }
 
@@ -88,11 +86,9 @@ function onPrepareArmorDerivedData(wrapped) {
         gp += new game.pf2e.Coins(this._source.system.price.value).goldValue
     }
 
-    if (level < 8) {
-        this.system.price.value = new game.pf2e.Coins({ gp })
-        return
+    if (level >= 8) {
+        gp -= level >= 20 ? 49440 : level >= 14 ? 3440 : 340
     }
 
-    gp -= level >= 20 ? 49440 : level >= 14 ? 3440 : 340
     this.system.price.value = new game.pf2e.Coins({ gp })
 }
