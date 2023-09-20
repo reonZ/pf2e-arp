@@ -1,3 +1,7 @@
+# 1.5.3
+
+-   fixed price manipulation of `Specific Magic` items
+
 # 1.5.2
 
 -   price manipulation is now global instead of only affecting characters
