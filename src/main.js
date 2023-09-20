@@ -50,7 +50,7 @@ function onPrepareWeaponDerivedData(wrapped) {
     wrapped()
 
     const traits = this._source.system.traits.value
-    if (!this.actor || (traits.includes('alchemical') && traits.includes('bomb'))) return
+    if (!this.actor || this.isSpecific || (traits.includes('alchemical') && traits.includes('bomb'))) return
 
     let gp = this.price.value.goldValue
 
@@ -95,7 +95,7 @@ const ARMOR_RESILIENCY_PRICE = {
 function onPrepareArmorDerivedData(wrapped) {
     wrapped()
 
-    if (!this.actor || this.isShield) return
+    if (!this.actor || this.isSpecific || this.isShield) return
 
     let gp = this.price.value.goldValue
 
