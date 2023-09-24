@@ -5,6 +5,8 @@ const PREPARE_WEAPON_DERIVED_DATA = 'CONFIG.PF2E.Item.documentClasses.weapon.pro
 const PREPARE_ARMOR_DATA = 'CONFIG.PF2E.Item.documentClasses.armor.prototype.prepareBaseData'
 const PREPARE_Armor_DERIVED_DATA = 'CONFIG.PF2E.Item.documentClasses.armor.prototype.prepareDerivedData'
 
+const WEAPON_EXCLUDES = ['Compendium.pf2e.equipment-srd.Item.ZhxxqYpVdVx0jSMm']
+
 Hooks.once('init', () => {
     registerWrapper(PREPARE_WEAPON_DATA, onPrepareWeaponData, 'WRAPPER')
     registerWrapper(PREPARE_WEAPON_DERIVED_DATA, onPrepareWeaponDerivedData, 'WRAPPER')
@@ -22,7 +24,7 @@ Hooks.once('ready', () => {
 
 function onPrepareWeaponData(wrapped) {
     const actor = this.actor
-    if (!actor || !actor.isOfType('character')) return wrapped()
+    if (!actor || !actor.isOfType('character') || WEAPON_EXCLUDES.includes(this.sourceId)) return wrapped()
 
     const level = actor.level
 
@@ -50,7 +52,13 @@ function onPrepareWeaponDerivedData(wrapped) {
     wrapped()
 
     const traits = this._source.system.traits.value
-    if (!this.actor || this.isSpecific || (traits.includes('alchemical') && traits.includes('bomb'))) return
+    if (
+        !this.actor ||
+        this.isSpecific ||
+        (traits.includes('alchemical') && traits.includes('bomb')) ||
+        WEAPON_EXCLUDES.includes(this.sourceId)
+    )
+        return
 
     let gp = this.price.value.goldValue
 
