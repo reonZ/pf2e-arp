@@ -1,3 +1,7 @@
+# 1.6.0
+
+-   added exception for the `Shield Bash` weapon/maneuver
+
 # 1.5.3
 
 -   fixed price manipulation of `Specific Magic` items
