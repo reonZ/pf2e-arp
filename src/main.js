@@ -22,9 +22,18 @@ Hooks.once('ready', () => {
     }
 })
 
+function isValidActor(actor, isCharacter = false) {
+    return actor && !actor.getFlag('pf2e', 'disableABP') && (!isCharacter || actor.isOfType('character'))
+}
+
+function isValidWeapon(weapon) {
+    const traits = weapon._source.system.traits.value
+    return !traits.includes('alchemical') && !traits.includes('bomb') && !WEAPON_EXCLUDES.includes(weapon.sourceId)
+}
+
 function onPrepareWeaponData(wrapped) {
     const actor = this.actor
-    if (!actor || !actor.isOfType('character') || WEAPON_EXCLUDES.includes(this.sourceId)) return wrapped()
+    if (!isValidActor(actor, true) || !isValidWeapon(this)) return wrapped()
 
     const level = actor.level
 
@@ -51,14 +60,7 @@ const WEAPON_STRIKING_PRICE = {
 function onPrepareWeaponDerivedData(wrapped) {
     wrapped()
 
-    const traits = this._source.system.traits.value
-    if (
-        !this.actor ||
-        this.isSpecific ||
-        (traits.includes('alchemical') && traits.includes('bomb')) ||
-        WEAPON_EXCLUDES.includes(this.sourceId)
-    )
-        return
+    if (!isValidActor(this.actor) || this.isSpecific || !isValidWeapon(this)) return
 
     let gp = this.price.value.goldValue
 
@@ -78,7 +80,7 @@ function onPrepareArmorData(wrapped) {
     if (this.isShield) return wrapped()
 
     const actor = this.actor
-    if (!actor || !actor.isOfType('character')) return wrapped()
+    if (!isValidActor(actor, true)) return wrapped()
 
     const level = actor.level
 
@@ -103,7 +105,7 @@ const ARMOR_RESILIENCY_PRICE = {
 function onPrepareArmorDerivedData(wrapped) {
     wrapped()
 
-    if (!this.actor || this.isSpecific || this.isShield) return
+    if (!isValidActor(this.actor) || this.isSpecific || this.isShield) return
 
     let gp = this.price.value.goldValue
 
