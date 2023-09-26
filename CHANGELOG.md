@@ -1,3 +1,7 @@
+# 1.7.0
+
+-   added exception for companions built with `PF2e Companion Compedia`
+
 # 1.6.0
 
 -   added exception for the `Shield Bash` weapon/maneuver
