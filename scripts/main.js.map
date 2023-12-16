@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../src/main.js"],
-  "sourcesContent": ["Hooks.once('ready', () => {\r\n    if (!game.user.isGM) return\r\n    ui.notifications.error(\r\n        `The module <strong>PF2e Automatic Rune Porgression</strong> is not compatible with the latest versions of the <strong>Pathfinder Second Edition</strong> system, if you still want to use this variant, you can find its replacement in the module <strong>PF2e Toolbelt</strong>.`,\r\n        { permanent: true }\r\n    )\r\n})\r\n"],
+  "sourcesContent": ["Hooks.once('ready', () => {\r\n    if (!game.user.isGM) return\r\n    ui.notifications.error(\r\n        `The module <strong>PF2e Automatic Rune Progression</strong> is not compatible with the latest versions of the <strong>Pathfinder Second Edition</strong> system, if you still want to use this variant, you can find its replacement in the module <strong>PF2e Toolbelt</strong>.`,\r\n        { permanent: true }\r\n    )\r\n})\r\n"],
   "mappings": "MAAA,MAAM,KAAK,QAAS,IAAM,CACjB,KAAK,KAAK,MACf,GAAG,cAAc,MACb,qRACA,CAAE,UAAW,EAAK,CACtB,CACJ,CAAC",
   "names": []
 }
