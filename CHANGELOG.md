@@ -1,3 +1,7 @@
+# 1.8.0
+
+-   added incompatibility error notification when using a version of the system starting from `5.10.0`
+
 # 1.7.0
 
 -   added exception for companions built with `PF2e Companion Compedia`
